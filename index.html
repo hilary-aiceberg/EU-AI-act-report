@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -738,62 +739,105 @@
                 </div>
             </div>
 
-            <div class="timeline-section">
-                <div class="timeline-header">
-                    <h2>📅 Compliance Timeline to Q3 2026</h2>
-                    <p>Critical milestones and deadlines for achieving full EU AI Act compliance</p>
+
+
+            <div class="section">
+                <h2 class="section-title">📈 Compliance Progress Tracking</h2>
+                <div class="summary-stats">
+                    <div class="stat-card">
+                        <div class="stat-number blue">67%</div>
+                        <div class="stat-label">Overall Readiness</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number green">18</div>
+                        <div class="stat-label">Weeks Estimated to Complete</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number yellow">€2.3M</div>
+                        <div class="stat-label">Est. Implementation Cost</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number red">€18M</div>
+                        <div class="stat-label">Potential Non-Compliance Fines</div>
+                    </div>
                 </div>
+            </div>
+
+            <div class="action-items">
+                <h3>🎯 Critical Action Items & Documentation Gaps</h3>
+                <ul class="action-list">
+                    <li class="priority-high"><strong>HIGH PRIORITY:</strong> Implement Article 12 automatic logging with immutable event histories (Est. 8-12 weeks)</li>
+                    <li class="priority-high"><strong>HIGH PRIORITY:</strong> Complete bias testing documentation for Article 10 compliance (Est. 4-6 weeks)</li>
+                    <li class="priority-medium"><strong>MEDIUM PRIORITY:</strong> Enhance performance monitoring for Article 15 robustness requirements (Est. 6-8 weeks)</li>
+                    <li class="priority-medium"><strong>MEDIUM PRIORITY:</strong> Finalize training dataset documentation and lineage tracking (Est. 3-4 weeks)</li>
+                    <li class="priority-low"><strong>LOW PRIORITY:</strong> Update transparency disclosures for limited-risk systems (Est. 2-3 weeks)</li>
+                    <li class="priority-low"><strong>LOW PRIORITY:</strong> Conduct comprehensive staff training on EU AI Act requirements (Est. 4 weeks)</li>
+                </ul>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; padding: 25px; border-radius: 8px; margin-top: 30px;">
+                <h3>🚀 Next Steps with AIceberg</h3>
+                <ul style="list-style: none; margin-top: 15px;">
+                    <li style="padding: 8px 0; padding-left: 25px; position: relative;">
+                        <span style="position: absolute; left: 0;">✅</span>
+                        <strong>Schedule Implementation Planning:</strong> Connect with our compliance team to develop detailed implementation roadmap
+                    </li>
+                    <li style="padding: 8px 0; padding-left: 25px; position: relative;">
+                        <span style="position: absolute; left: 0;">📋</span>
+                        <strong>Configure Automatic Logging:</strong> Deploy AIceberg's immutable event logging for Article 12 compliance
+                    </li>
+                    <li style="padding: 8px 0; padding-left: 25px; position: relative;">
+                        <span style="position: absolute; left: 0;">🔍</span>
+                        <strong>Enhanced Bias Testing:</strong> Implement comprehensive bias detection and documentation workflows
+                    </li>
+                    <li style="padding: 8px 0; padding-left: 25px; position: relative;">
+                        <span style="position: absolute; left: 0;">📊</span>
+                        <strong>Continuous Monitoring:</strong> Set up real-time compliance dashboards and automated reporting
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>AIceberg EU AI Act Readiness Report | Generated: January 15, 2025 | Confidential & Proprietary</p>
+            <p>For questions about this report or implementation guidance, contact: compliance@aiceberg.ai</p>
+        </div>
+    </div>
+    
+    <script>
+        // Interactive progress bar animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            
+            // Animate progress bars on load
+            setTimeout(() => {
+                progressBars.forEach((bar, index) => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    bar.style.transition = 'width 1s ease-in-out';
+                    
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, index * 200);
+                });
+            }, 500);
+            
+            // Add hover effects to compliance cards
+            const complianceCards = document.querySelectorAll('.compliance-card');
+            complianceCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                });
                 
-                <div class="timeline-container">
-                    <div class="timeline-line"></div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">Q1 2025 (Current)</div>
-                            <div class="timeline-title">Assessment & Planning Phase</div>
-                            <div class="timeline-desc">Complete initial compliance assessment and develop comprehensive action plan</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">Q2 2025</div>
-                            <div class="timeline-title">Documentation & Risk Management</div>
-                            <div class="timeline-desc">Implement Article 12 automatic logging, complete bias testing documentation</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">Q3 2025</div>
-                            <div class="timeline-title">Technical Implementation</div>
-                            <div class="timeline-desc">Deploy immutable event logging, enhance performance monitoring systems</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">Q4 2025</div>
-                            <div class="timeline-title">Testing & Validation</div>
-                            <div class="timeline-desc">Comprehensive testing of all compliance measures, documentation review</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">Q1 2026</div>
-                            <div class="timeline-title">Final Preparations</div>
-                            <div class="timeline-desc">Staff training, process refinement, regulatory submission preparation</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">Q2 2026</div>
-                            <div class="timeline-title">Pre-Enforcement Review</div>
-                            <div class="timeline-desc">Final compliance audit, gap remediation, readiness verification</div>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <div class="timeline-content">
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.08)';
+                });
+            });
+            
+            // Timeline item animations
+        });
+    </script>
+</body>
+</html>
