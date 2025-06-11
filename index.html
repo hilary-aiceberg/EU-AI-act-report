@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIceberg EU AI Act Readiness Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .report-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .report-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .meta-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .meta-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .executive-summary {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-number.green { color: #27ae60; }
+        .stat-number.yellow { color: #f39c12; }
+        .stat-number.red { color: #e74c3c; }
+        .stat-number.blue { color: #3498db; }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+        }
+        
+        .compliance-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 4px solid #3498db;
+        }
+        
+        .compliance-card.compliant { border-top-color: #27ae60; }
+        .compliance-card.partial { border-top-color: #f39c12; }
+        .compliance-card.non-compliant { border-top-color: #e74c3c; }
+        .compliance-card.not-applicable { border-top-color: #95a5a6; }
+        
+        .compliance-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .compliance-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .compliance-icon.compliant { background: #27ae60; }
+        .compliance-icon.partial { background: #f39c12; }
+        .compliance-icon.non-compliant { background: #e74c3c; }
+        .compliance-icon.not-applicable { background: #95a5a6; }
+        
+        .compliance-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .compliance-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 10px;
+        }
+        
+        .status-compliant { background: #d5f4e6; color: #27ae60; }
+        .status-partial { background: #fef5e7; color: #f39c12; }
+        .status-non-compliant { background: #fdf2f2; color: #e74c3c; }
+        .status-not-applicable { background: #f8f9fa; color: #95a5a6; }
+        
+        .compliance-details {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ecf0f1;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+        }
+        
+        .risk-assessment {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .risk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .risk-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .risk-high { border-left: 4px solid #e74c3c; }
+        .risk-limited { border-left: 4px solid #f39c12; }
+        .risk-minimal { border-left: 4px solid #27ae60; }
+        
+        .timeline-section {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            width: 45%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 40px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 55%;
+            text-align: left;
+            padding-left: 40px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 4px solid #0984e3;
+            border-radius: 50%;
+        }
+        
+        .timeline-item:nth-child(odd)::before {
+            right: -8px;
+        }
+        
+        .timeline-item:nth-child(even)::before {
+            left: -8px;
+        }
+        
+        .timeline-content {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-title {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        
+        .timeline-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .action-items {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .action-items h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .action-list {
+            list-style: none;
+        }
+        
+        .action-list li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            border-bottom: 1px solid #f0e68c;
+        }
+        
+        .action-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .action-list li:before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+        
+        .priority-high { font-weight: 700; color: #e74c3c; }
+        .priority-medium { font-weight: 600; color: #f39c12; }
+        .priority-low { color: #27ae60; }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-compliant { background: #27ae60; }
+        .progress-partial { background: #f39c12; }
+        .progress-non-compliant { background: #e74c3c; }
+        
+        @media (max-width: 768px) {
+            .compliance-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .timeline-item {
+                width: 100% !important;
+                left: 0 !important;
+                text-align: left !important;
+                padding: 0 0 0 40px !important;
+            }
+            
+            .timeline-item::before {
+                left: -8px !important;
+            }
+            
+            .timeline-line {
+                left: 8px;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="header">
+            <h1>🇪🇺 EU AI Act Readiness Report</h1>
+            <p class="subtitle">Comprehensive Compliance Assessment & Readiness Analysis</p>
+            <div class="report-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Assessment Date</div>
+                    <div class="meta-value">January 15, 2025</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">AI Systems Evaluated</div>
+                    <div class="meta-value">12 Systems</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Days to Q3 2026 Deadline</div>
+                    <div class="meta-value">547 Days</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Overall Readiness</div>
+                    <div class="meta-value">67% Complete</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="executive-summary">
+                <h2>📋 Executive Summary</h2>
+                <p>Your organization has made significant progress toward EU AI Act compliance with <strong>4 of 7 applicable articles</strong> showing full compliance. Critical gaps remain in documentation and risk management systems that require immediate attention to meet the Q3 2026 enforcement deadline. AIceberg's analysis shows your current readiness level at 67%, with clear pathways to achieve full compliance.</p>
+                
+                <div class="summary-stats">
+                    <div class="stat-card">
+                        <div class="stat-number green">4</div>
+                        <div class="stat-label">Fully Compliant Articles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number yellow">2</div>
+                        <div class="stat-label">Partially Compliant</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number red">1</div>
+                        <div class="stat-label">Non-Compliant</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number blue">547</div>
+                        <div class="stat-label">Days Remaining</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">📊 Article-by-Article Compliance Status</h2>
+                <div class="compliance-grid">
+                    <div class="compliance-card compliant">
+                        <div class="compliance-header">
+                            <div class="compliance-icon compliant">✓</div>
+                            <div>
+                                <div class="compliance-title">Article 9: Risk Management System</div>
+                                <span class="compliance-status status-compliant">Compliant</span>
+                            </div>
+                        </div>
+                        <div class="compliance-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Documentation Status</span>
+                                <span class="detail-value">Complete</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Risk Monitoring</span>
+                                <span class="detail-value">Active</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Automated Alerts</span>
+                                <span class="detail-value">Enabled</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-compliant" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="compliance-card partial">
+                        <div class="compliance-header">
+                            <div class="compliance-icon partial">!</div>
+                            <div>
+                                <div class="compliance-title">Article 10: Data & Data Governance</div>
+                                <span class="compliance-status status-partial">Partial</span>
+                            </div>
+                        </div>
+                        <div class="compliance-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Data Lineage Reports</span>
+                                <span class="detail-value">Available</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Bias Testing</span>
+                                <span class="detail-value">Limited</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Training Documentation</span>
+                                <span class="detail-value">Incomplete</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-partial" style="width: 65%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="compliance-card compliant">
+                        <div class="compliance-header">
+                            <div class="compliance-icon compliant">✓</div>
+                            <div>
+                                <div class="compliance-title">Article 11: Technical Documentation</div>
+                                <span class="compliance-status status-compliant">Compliant</span>
+                            </div>
+                        </div>
+                        <div class="compliance-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Model Scorecards</span>
+                                <span class="detail-value">Complete</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Risk Signal Logs</span>
+                                <span class="detail-value">Automated</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Export Ready</span>
+                                <span class="detail-value">Yes</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-compliant" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="compliance-card non-compliant">
+                        <div class="compliance-header">
+                            <div class="compliance-icon non-compliant">✗</div>
+                            <div>
+                                <div class="compliance-title">Article 12: Automatic Logging</div>
+                                <span class="compliance-status status-non-compliant">Non-Compliant</span>
+                            </div>
+                        </div>
+                        <div class="compliance-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Immutable Event History</span>
+                                <span class="detail-value">Not Implemented</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Usage Tracking</span>
+                                <span class="detail-value">Basic Only</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Audit Trail</span>
+                                <span class="detail-value">Incomplete</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-non-compliant" style="width: 25%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="compliance-card compliant">
+                        <div class="compliance-header">
+                            <div class="compliance-icon compliant">✓</div>
+                            <div>
+                                <div class="compliance-title">Article 14: Human Oversight</div>
+                                <span class="compliance-status status-compliant">Compliant</span>
+                            </div>
+                        </div>
+                        <div class="compliance-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Role-Based Access</span>
+                                <span class="detail-value">Configured</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Override Tracking</span>
+                                <span class="detail-value">Active</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Human-in-Loop</span>
+                                <span class="detail-value">Enabled</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-compliant" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="compliance-card partial">
+                        <div class="compliance-header">
+                            <div class="compliance-icon partial">!</div>
+                            <div>
+                                <div class="compliance-title">Article 15: Accuracy & Robustness</div>
+                                <span class="compliance-status status-partial">Partial</span>
+                            </div>
+                        </div>
+                        <div class="compliance-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Automated Logging</span>
+                                <span class="detail-value">Enabled</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Threat Detection</span>
+                                <span class="detail-value">Active</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Performance Monitoring</span>
+                                <span class="detail-value">Limited</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-partial" style="width: 78%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="compliance-card compliant">
+                        <div class="compliance-header">
+                            <div class="compliance-icon compliant">✓</div>
+                            <div>
+                                <div class="compliance-title">General Safety & Security</div>
+                                <span class="compliance-status status-compliant">Compliant</span>
+                            </div>
+                        </div>
+                        <div class="compliance-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Risk Signal Library</span>
+                                <span class="detail-value">Comprehensive</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Real-time Monitoring</span>
+                                <span class="detail-value">Active</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Cyber Threat Detection</span>
+                                <span class="detail-value">Advanced</span>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-compliant" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">⚖️ AI System Risk Classification</h2>
+                <div class="risk-assessment">
+                    <h3>Risk Assessment Overview</h3>
+                    <p>Based on your AI system deployments, we've identified the risk classifications that apply to your organization under the EU AI Act framework.</p>
+                    
+                    <div class="risk-grid">
+                        <div class="risk-card risk-high">
+                            <h4>🚨 High-Risk AI Systems (8 systems)</h4>
+                            <div class="detail-item">
+                                <span class="detail-label">Healthcare AI</span>
+                                <span class="detail-value">3 systems</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">HR & Recruitment</span>
+                                <span class="detail-value">2 systems</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Financial Services</span>
+                                <span class="detail-value">2 systems</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Critical Infrastructure</span>
+                                <span class="detail-value">1 system</span>
+                            </div>
+                            <p style="margin-top: 15px; font-size: 0.9rem; color: #7f8c8d;">
+                                <strong>Compliance Required:</strong> Full documentation, risk management, human oversight, and continuous monitoring mandatory.
+                            </p>
+                        </div>
+                        
+                        <div class="risk-card risk-limited">
+                            <h4>⚡ Limited Risk AI Systems (3 systems)</h4>
+                            <div class="detail-item">
+                                <span class="detail-label">Customer Service Chatbots</span>
+                                <span class="detail-value">2 systems</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Content Generation</span>
+                                <span class="detail-value">1 system</span>
+                            </div>
+                            <p style="margin-top: 15px; font-size: 0.9rem; color: #7f8c8d;">
+                                <strong>Requirements:</strong> Transparency obligations and clear disclosure to users that they are interacting with AI.
+                            </p>
+                        </div>
+                        
+                        <div class="risk-card risk-minimal">
+                            <h4>✅ Minimal Risk AI Systems (1 system)</h4>
+                            <div class="detail-item">
+                                <span class="detail-label">Internal Analytics Tools</span>
+                                <span class="detail-value">1 system</span>
+                            </div>
+                            <p style="margin-top: 15px; font-size: 0.9rem; color: #7f8c8d;">
+                                <strong>Requirements:</strong> No specific obligations under the EU AI Act, but best practices recommended.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <div class="timeline-header">
+                    <h2>📅 Compliance Timeline to Q3 2026</h2>
+                    <p>Critical milestones and deadlines for achieving full EU AI Act compliance</p>
+                </div>
+                
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Q1 2025 (Current)</div>
+                            <div class="timeline-title">Assessment & Planning Phase</div>
+                            <div class="timeline-desc">Complete initial compliance assessment and develop comprehensive action plan</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Q2 2025</div>
+                            <div class="timeline-title">Documentation & Risk Management</div>
+                            <div class="timeline-desc">Implement Article 12 automatic logging, complete bias testing documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Q3 2025</div>
+                            <div class="timeline-title">Technical Implementation</div>
+                            <div class="timeline-desc">Deploy immutable event logging, enhance performance monitoring systems</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Q4 2025</div>
+                            <div class="timeline-title">Testing & Validation</div>
+                            <div class="timeline-desc">Comprehensive testing of all compliance measures, documentation review</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Q1 2026</div>
+                            <div class="timeline-title">Final Preparations</div>
+                            <div class="timeline-desc">Staff training, process refinement, regulatory submission preparation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Q2 2026</div>
+                            <div class="timeline-title">Pre-Enforcement Review</div>
+                            <div class="timeline-desc">Final compliance audit, gap remediation, readiness verification</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
